@@ -1,0 +1,17 @@
+<template>
+    <require from="./app.css"></require>
+    <require from="./question"></require>
+    <require from="./navbar"></require>
+    <require from="./results"></require>
+
+    <div class="app text-center">
+        <div if.bind="currentQuestionIndex < questions.length">
+            <navbar></navbar>
+            <br>
+            <question></question>
+        </div>
+        <div if.bind="currentQuestionIndex === questions.length">
+            <results></results>
+        </div>
+    </div>
+</template>
