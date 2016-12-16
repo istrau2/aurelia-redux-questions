@@ -8,16 +8,21 @@ export class ResultsCustomElement {
         this.store = store;
     }
 
+    bind() {
+        this.unsubcribe = this.store.subscribe(this.update.bind(this));
+        this.update();
+        this.calculateNumCorrect();
+    }
+
+    deactivate() {
+        this.unsubcribe();
+    }
+
     update() {
         const newState = this.store.getState();
 
         this.questions = newState.questions;
         this.answerIndexesByQuestionIndex = newState.answerIndexesByQuestionIndex;
-    }
-
-    bind() {
-        this.update();
-        this.calculateNumCorrect();
     }
 
     calculateNumCorrect() {

@@ -10,8 +10,16 @@ export class QuestionCustomElement {
     constructor(store) {
         this.store = store;
 
-        this.store.subscribe(this.update.bind(this));
         this.update();
+    }
+
+    bind() {
+        this.unsubcribe = this.store.subscribe(this.update.bind(this));
+        this.update();
+    }
+
+    deactivate() {
+        this.unsubcribe();
     }
 
     update() {

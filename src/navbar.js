@@ -6,9 +6,15 @@ import {GO_TO_PREVIOUS_QUESTION} from './action-types';
 export class NavbarCustomElement {
     constructor(store) {
         this.store = store;
+    }
 
-        this.store.subscribe(this.update.bind(this));
+    bind() {
+        this.unsubcribe = this.store.subscribe(this.update.bind(this));
         this.update();
+    }
+
+    deactivate() {
+        this.unsubcribe();
     }
 
     update() {
@@ -18,6 +24,7 @@ export class NavbarCustomElement {
         this.currentQuestionIndex = newState.currentQuestionIndex;
         this.answerIndexesByQuestionIndex = newState.answerIndexesByQuestionIndex;
     }
+
 
     goToIndex(index) {
         //if (index >= this.currentQuestionIndex) {
