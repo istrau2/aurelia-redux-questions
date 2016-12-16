@@ -9,8 +9,6 @@ export class QuestionCustomElement {
 
     constructor(store) {
         this.store = store;
-
-        this.update();
     }
 
     bind() {
