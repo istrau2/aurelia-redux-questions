@@ -7,5 +7,6 @@ npm-debug.log*
 /.awcache
 /electron.js*
 /release
+/.idea
 /test/coverage
 yarn.lock
