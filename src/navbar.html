@@ -2,7 +2,7 @@
   <div class="btn-toolbar" role="toolbar">
     <div class="btn-group" role="group" repeat.for="question of questions">
       <button type="button" class="btn btn-${$index === $parent.currentQuestionIndex ? 'info' : 'default'}"
-              click.trigger="goToIndex($index)" disabled.bind="!answerIndexesByQuestionIndex[$index] && answerIndexesByQuestionIndex[$index] !== 0">${$index}</button>
+              click.trigger="goToIndex($index)" disabled.bind="!answerIndexesByQuestionIndex[$index - 1] && answerIndexesByQuestionIndex[$index - 1] !== 0">${$index}</button>
     </div>
   </div>
 </template>
