@@ -1,6 +1,6 @@
 import {inject, computedFrom} from 'aurelia-framework';
 import {Store} from 'aurelia-redux-plugin';
-import {GO_TO_PREVIOUS_QUESTION} from './action-types';
+import {GO_TO_QUESTION} from './action-types';
 
 @inject(Store)
 export class NavbarCustomElement {
@@ -31,7 +31,7 @@ export class NavbarCustomElement {
         //}
 
         this.store.dispatch({
-            type: GO_TO_PREVIOUS_QUESTION,
+            type: GO_TO_QUESTION,
             payload: {
                 questionIndex: index
             }

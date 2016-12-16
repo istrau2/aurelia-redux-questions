@@ -1,5 +1,5 @@
 <template>
-    <div class="question">
+    <div class="question" change.delegate="answer()">
         <h3 innerhtml.bind="question.question.body"></h3>
         <div class="text-center" repeat.for="choice of question.choices">
             <label>

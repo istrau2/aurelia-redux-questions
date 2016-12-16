@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {Store} from 'aurelia-redux-plugin';
-import {NEXT_QUESTION} from './action-types';
+import {NEXT_QUESTION, ANSWER_QUESTION} from './action-types';
 
 @inject(Store)
 export class QuestionCustomElement {
@@ -29,12 +29,18 @@ export class QuestionCustomElement {
         this.chosenAnswerIndex = newChosenAnswerIndex ? newChosenAnswerIndex.toString() : undefined;
     }
 
-    next() {
+    answer() {
         this.store.dispatch({
-            type: NEXT_QUESTION,
+            type: ANSWER_QUESTION,
             payload: {
                 answerIndex: parseInt(this.chosenAnswerIndex, 10)
             }
+        });
+    }
+
+    next() {
+        this.store.dispatch({
+            type: NEXT_QUESTION
         });
     }
 }

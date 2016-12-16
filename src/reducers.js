@@ -5,41 +5,36 @@
 import * as actionTypes from './action-types';
 
 export function rootReducer(state, action) {
+    let nextState = {};
+
     switch(action.type) {
         case actionTypes.NEXT_QUESTION:
-            let nextState;
-
-            if (state.currentQuestionIndex === state.questions.length) {
-                nextState = {
-                    currentQuestionIndex: 0,
-                    answerIndexesByQuestionIndex: {}
-                };
-            }
-            else {
-                nextState = {
-                    currentQuestionIndex: state.currentQuestionIndex + 1,
-                    answerIndexesByQuestionIndex: {
-                        ...state.answerIndexesByQuestionIndex,
-                        ...{
-                            [state.currentQuestionIndex]: action.payload.answerIndex
-                        }
-                    }
-                };
-            }
-
-            return {
-                ...state,
-                ...nextState
+            nextState = {
+                currentQuestionIndex: state.currentQuestionIndex === state.questions.length ? 0 : state.currentQuestionIndex + 1,
+                answerIndexesByQuestionIndex: state.currentQuestionIndex === state.questions.length ? {} : state.answerIndexesByQuestionIndex
             };
+            break;
 
-        case actionTypes.GO_TO_PREVIOUS_QUESTION:
-            return {
-                ...state,
-                ...{
-                    currentQuestionIndex: action.payload.questionIndex
+        case actionTypes.GO_TO_QUESTION:
+            nextState = {
+                currentQuestionIndex: action.payload.questionIndex
+            };
+            break;
+
+        case actionTypes.ANSWER_QUESTION:
+            nextState = {
+                answerIndexesByQuestionIndex: {
+                    ...state.answerIndexesByQuestionIndex,
+                    ...{
+                        [state.currentQuestionIndex]: action.payload.answerIndex
+                    }
                 }
             };
+            break;
     }
 
-    return state;
+    return {
+        ...state,
+        ...nextState
+    };
 }
