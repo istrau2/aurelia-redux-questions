@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {inject, computedFrom} from 'aurelia-framework';
 import {Store} from 'aurelia-redux-plugin';
 import {GO_TO_PREVIOUS_QUESTION} from './action-types';
 
@@ -24,7 +24,6 @@ export class NavbarCustomElement {
         this.currentQuestionIndex = newState.currentQuestionIndex;
         this.answerIndexesByQuestionIndex = newState.answerIndexesByQuestionIndex;
     }
-
 
     goToIndex(index) {
         //if (index >= this.currentQuestionIndex) {

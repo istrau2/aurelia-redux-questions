@@ -4,12 +4,12 @@
 
 import * as actionTypes from './action-types';
 
-export function rootReducer(previousState, action) {
+export function rootReducer(state, action) {
     switch(action.type) {
         case actionTypes.NEXT_QUESTION:
             let nextState;
 
-            if (previousState.currentQuestionIndex === previousState.questions.length) {
+            if (state.currentQuestionIndex === state.questions.length) {
                 nextState = {
                     currentQuestionIndex: 0,
                     answerIndexesByQuestionIndex: {}
@@ -17,29 +17,29 @@ export function rootReducer(previousState, action) {
             }
             else {
                 nextState = {
-                    currentQuestionIndex: previousState.currentQuestionIndex + 1,
+                    currentQuestionIndex: state.currentQuestionIndex + 1,
                     answerIndexesByQuestionIndex: {
-                        ...previousState.answerIndexesByQuestionIndex,
+                        ...state.answerIndexesByQuestionIndex,
                         ...{
-                            [previousState.currentQuestionIndex]: action.payload.answerIndex
+                            [state.currentQuestionIndex]: action.payload.answerIndex
                         }
                     }
                 };
             }
 
             return {
-                ...previousState,
+                ...state,
                 ...nextState
             };
 
         case actionTypes.GO_TO_PREVIOUS_QUESTION:
             return {
-                ...previousState,
+                ...state,
                 ...{
                     currentQuestionIndex: action.payload.questionIndex
                 }
             };
     }
 
-    return previousState;
+    return state;
 }

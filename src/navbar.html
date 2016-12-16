@@ -1,8 +1,9 @@
 <template>
-  <div class="btn-toolbar" role="toolbar">
-    <div class="btn-group" role="group" repeat.for="question of questions">
-      <button type="button" class="btn btn-${$index === $parent.currentQuestionIndex ? 'info' : 'default'}"
-              click.trigger="goToIndex($index)" disabled.bind="!answerIndexesByQuestionIndex[$index - 1] && answerIndexesByQuestionIndex[$index - 1] !== 0">${$index}</button>
+    <require from="./value-converters"></require>
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group" role="group" repeat.for="question of questions">
+            <button type="button" class="btn btn-${$index === $parent.currentQuestionIndex ? 'info' : 'default'}"
+                    click.trigger="goToIndex($index)" disabled.bind="answerIndexesByQuestionIndex | isNavigable:$index | negate">${$index}</button>
+        </div>
     </div>
-  </div>
 </template>
